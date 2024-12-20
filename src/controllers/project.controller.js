@@ -2,13 +2,13 @@ import Project from "../models/project.modal.js";
 
 
 export const createProject = async (req, res) => {
-    const { name, description, nodes, edges } = req.body;
+    const { name, description, nodes, edges, userId } = req.body;
 
     try {
         const project = new Project({
             name,
             description,
-            owner: req.user.id,
+            owner: user,
             nodes,
             edges,
         });
@@ -19,7 +19,6 @@ export const createProject = async (req, res) => {
         res.status(500).json({ message: "Failed to create project", error });
     }
 };
-
 
 export const getAllProjects = async (req, res) => {
     try {
@@ -42,7 +41,6 @@ export const getProjectById = async (req, res) => {
     }
 };
 
-
 export const updateProject = async (req, res) => {
     const { name, description, nodes, edges } = req.body;
 
@@ -61,7 +59,6 @@ export const updateProject = async (req, res) => {
         res.status(500).json({ message: "Failed to update project", error });
     }
 };
-
 
 export const deleteProject = async (req, res) => {
     try {
